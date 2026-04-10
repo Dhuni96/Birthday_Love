@@ -61,19 +61,18 @@
 
     /* SLIDESHOW */
     .slideshow {
-      margin-top: 20px;
+       width: 300px;
+      margin: 20px auto;
     }
 
     .slideshow img {
-      width: 200px;
-      height: 200px;
-      border-radius: 20px;
+      width: 100%;
+      border-radius: 10px;
       display: none;
     }
 
     .active {
       display: block;
-      margin: auto;
     }
 
     /* HEARTS */
@@ -119,10 +118,10 @@
 
     <!-- SLIDESHOW -->
     <div class="slideshow">
-      <img class="slide active" src="1.jpg">
-     <img class="slide" src="2.jpg">
-      <img class="slide" src="3.jpg">
-    </div>
+    <img class="slide active" src="1.jpg">
+    <img class="slide" src="2.jpg">
+    <img class="slide" src="3.jpg">
+</div>
 
   </div>
 
@@ -203,6 +202,17 @@ I LOVE YOU FOREVER ❤️`;
   }, 2000);
 
 </script>
+let index = 0;
+const slides = document.querySelectorAll(".slide");
 
+function showSlides() {
+    slides.forEach(slide => slide.classList.remove("active"));
+    index++;
+    if (index > slides.length) { index = 1; }
+    slides[index - 1].classList.add("active");
+    setTimeout(showSlides, 2000);
+}
+
+showSlides();
 </body>
 </html>
