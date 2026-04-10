@@ -17,7 +17,6 @@
       padding: 20px;
     }
 
-    /* ENVELOPE */
     #envelope {
       margin-top: 100px;
       cursor: pointer;
@@ -61,7 +60,7 @@
 
     /* SLIDESHOW */
     .slideshow {
-       width: 300px;
+      width: 300px;
       margin: 20px auto;
     }
 
@@ -71,7 +70,7 @@
       display: none;
     }
 
-    .active {
+    .slideshow img.active {
       display: block;
     }
 
@@ -94,11 +93,11 @@
 <div class="overlay">
 
   <!-- ENVELOPE -->
-  <div id="envelope" onclick="openLetter()">
+  <div id="envelope" onclick="openLetter(); startTyping();">
     <h2>💌 Click to open your birthday letter baby</h2>
   </div>
 
-  <!-- LETTER CONTENT -->
+  <!-- LETTER -->
   <div id="letter">
 
     <h1>🎂 Happy Birthday My Baby ❤️❤️</h1>
@@ -110,7 +109,7 @@
 
     <br>
 
-    <!-- VOICE MESSAGE -->
+    <!-- VOICE -->
     <h3>🎤 A message from me</h3>
     <audio controls>
       <source src="Voice 0031.mp3" type="audio/mpeg">
@@ -118,15 +117,15 @@
 
     <!-- SLIDESHOW -->
     <div class="slideshow">
-    <img class="slide active" src="1.jpg">
-    <img class="slide" src="2.jpg">
-    <img class="slide" src="3.jpg">
-</div>
+      <img class="slide active" src="1.jpg">
+      <img class="slide" src="2.jpg">
+      <img class="slide" src="3.jpg">
+    </div>
 
   </div>
-
 </div>
 
+<!-- BACKGROUND MUSIC -->
 <audio autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
 </audio>
@@ -156,20 +155,13 @@ Happy Birthday my love...
 I LOVE YOU FOREVER ❤️`;
 
   let i = 0;
-  function typing() {
+  function startTyping() {
     if (i < text.length) {
       document.getElementById("typewriter").innerHTML += text.charAt(i);
       i++;
-      setTimeout(typing, 40);
+      setTimeout(startTyping, 40);
     }
   }
-
-  // START typing after open
-  function startTyping() {
-    typing();
-  }
-
-  document.getElementById("envelope").addEventListener("click", startTyping);
 
   // KISS
   function showKiss() {
@@ -178,7 +170,7 @@ I LOVE YOU FOREVER ❤️`;
 
   // HEARTS
   function createHearts(e) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 6; i++) {
       let heart = document.createElement("div");
       heart.className = "heart";
       heart.innerHTML = "💖";
@@ -193,27 +185,22 @@ I LOVE YOU FOREVER ❤️`;
   let slideIndex = 0;
   const slides = document.getElementsByClassName("slide");
 
-  setInterval(() => {
+  function showSlides() {
     for (let i = 0; i < slides.length; i++) {
       slides[i].classList.remove("active");
     }
-    slideIndex = (slideIndex + 1) % slides.length;
-    slides[slideIndex].classList.add("active");
-  }, 2000);
 
-</script>
-let index = 0;
-const slides = document.querySelectorAll(".slide");
+    slideIndex++;
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
 
-function showSlides() {
-    slides.forEach(slide => slide.classList.remove("active"));
-    index++;
-    if (index > slides.length) { index = 1; }
-    slides[index - 1].classList.add("active");
+    slides[slideIndex - 1].classList.add("active");
     setTimeout(showSlides, 2000);
-}
+  }
 
-showSlides();
+  showSlides();
 </script>
+
 </body>
 </html>
